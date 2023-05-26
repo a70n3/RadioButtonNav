@@ -1,0 +1,73 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avaloniaRadioNav="clr-namespace:AvaloniaRadioNav"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaRadioNav.MainWindow"
+        Title="AvaloniaRadioNav">
+    <Window.Styles>
+        <Style Selector="RadioButton.Nav">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5 5 5 0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border 
+                            Height="{TemplateBinding Height}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Width="{TemplateBinding Width}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                Content="{TemplateBinding Content}"
+                                RecognizesAccessKey="True">
+                                
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style Selector="RadioButton.Nav:pointerover">
+            <Setter Property="Background" Value="Red"></Setter>
+        </Style>
+        <Style Selector="RadioButton.Nav:checked">
+            <Setter Property="Background" Value="Red"></Setter>
+        </Style>
+    </Window.Styles>
+    <Window.DataContext>
+        <avaloniaRadioNav:MainViewModel/>
+    </Window.DataContext>
+    <Grid ColumnDefinitions="*,*">
+        <StackPanel>
+            <RadioButton Classes="Nav" 
+                         Command="{Binding NavigateCommand}" 
+                         CommandParameter="{Binding $self.Content}" >Home</RadioButton>
+            <RadioButton Classes="Nav"
+                         Command="{Binding NavigateCommand}" 
+                         CommandParameter="{Binding $self.Content}">Products</RadioButton>
+            <RadioButton Classes="Nav" 
+                         Command="{Binding NavigateCommand}" 
+                         CommandParameter="{Binding $self.Content}">Reports</RadioButton>
+            <RadioButton Classes="Nav" 
+                         Command="{Binding NavigateCommand}" 
+                         CommandParameter="{Binding $self.Content}">Settings</RadioButton>
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <TextBlock Text="{Binding Page}"></TextBlock>
+        </Grid>
+    </Grid>
+</Window>
